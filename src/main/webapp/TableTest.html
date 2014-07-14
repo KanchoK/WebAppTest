@@ -60,8 +60,10 @@
                                         var siblings = $('#' + obj.ID).parent().siblings();
                                         $(siblings[1]).html(obj.newUsername);
                                         $(siblings[2]).html(obj.newPassword);
-                                        $('tr.hidden_row').hide();
                                         $('tr.hidden_row').children(".id").empty();
+                                        $('tr.hidden_row').find(".newUsername").val("");
+                                        $('tr.hidden_row').find(".newPassword").val("");
+                                        $('tr.hidden_row').hide();
                                     },
                                     error: function (e) {
                                         alert(e);

@@ -74,8 +74,8 @@ public class CRUDController extends HttpServlet {
 
             JSONObject objUser = new JSONObject();
             objUser.put("ID", user.getUserID());
-            objUser.put("username", user.getUsername());
-            objUser.put("password", user.getPassword());
+            objUser.put("newUsername", user.getUsername());
+            objUser.put("newPassword", user.getPassword());
 
             CrudDao.updateUser(user);
 
