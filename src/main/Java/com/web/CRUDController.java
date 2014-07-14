@@ -33,8 +33,13 @@ public class CRUDController extends HttpServlet {
             }
 
             objUsers.put("rows",array);
+
             PrintWriter out = response.getWriter();
             out.println(objUsers);
+//            String stringObj = objUsers.toString();
+//            stringObj = "{\"Result\":\"OK\",\"Records:\":"+stringObj+"}";
+//            PrintWriter out = response.getWriter();
+//            out.println(stringObj);
         }
 
         else if (operation.equals("delete")){

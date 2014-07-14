@@ -9,5 +9,7 @@
 <form method="post" action="newUser.html"><input type="submit" value="SighUp"></form>
 
 <p><a href="TableTest.html">CRUD</a></p>
+
+<p><a href="jTableTest.html">jTable</a></p>
 </body>
 </html>
