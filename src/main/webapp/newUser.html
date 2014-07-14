@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#button1").click(function(e){
+                e.preventDefault();
+                $.post("servlet3",
+                        {
+                            username:$('#username').val(),
+                            password:$('#password').val()
+                        },
+                        function(data){
+                            $("#button1").load("index.jsp")
+                        });
+            });
+        });
+    </script>
+    <title></title>
+</head>
+<body>
+<!--<form action="servlet3" method="post">-->
+    Username:<input id = "username" type="text" name="username" size="20"><br>
+    Password:<input id = "password" type="password" name="password" size="20">
+    <p><input id="button1" type="submit" value="SighUp"></p>
+<!--</form>-->
+</body>
+</html>

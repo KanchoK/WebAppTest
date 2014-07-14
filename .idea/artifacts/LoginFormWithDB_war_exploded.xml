@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="LoginFormWithDB:war exploded">
+    <output-path>$PROJECT_DIR$/target/LoginFormWithDB</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="LoginFormWithDB/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="LoginFormWithDB" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+          <element id="library" level="project" name="Maven: org.hsqldb:hsqldb:2.3.2" />
+          <element id="library" level="project" name="Maven: org.json:json:20140107" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

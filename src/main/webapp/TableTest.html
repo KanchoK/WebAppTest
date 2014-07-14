@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: 'CRUDController',
+                type: 'POST',
+                data: { operation: "getAllUsers" },
+                success: function (data) {
+                    var obj_rows = JSON.parse(data);
+                    var tbody = $('#dataTable tbody');
+                    for (i = 0; i < obj_rows.rows.length; i++) {
+                        tbody.append("<tr>" + "<td>" + obj_rows.rows[i].ID + "</td>" +
+                                "<td>" + obj_rows.rows[i].username + "</td>" +
+                                "<td>" + obj_rows.rows[i].password + "</td>" +
+                                "<td>" + "<input class='delete' id='"+ obj_rows.rows[i].ID +"' type='BUTTON' value='Delete'>" + "</td>" +
+                                "<td>" + "<input class='edit' id='"+ obj_rows.rows[i].ID +"'type='BUTTON' value='Edit'>" + "</td>" + "</tr>");
+                    }
+                    $('input.delete').click(function(e){
+                        var currentID = e.currentTarget.id;
+                        $.ajax({
+                            url: 'CRUDController',
+                            type: 'POST',
+                            data: {
+                                userID: currentID,
+                                operation: "delete" },
+                            success: function(data){
+                                var obj = JSON.parse(data);
+                                $('#' + obj.ID).parentsUntil('tbody')[1].remove();
+                            },
+                            error: function(e){
+                                alert(e);
+                            }
+                        });
+                    });
+                    $('input.edit').click(function(e){
+                        var currentID = e.currentTarget.id;
+                        $('tr.hidden_row').children(".id").prepend(currentID);
+                        $('tr.hidden_row').show();
+                        $('input.cancel').click(function(){
+                            $('tr.hidden_row').hide();
+                            $('tr.hidden_row').children(".id").empty();
+                        });
+                        $('input.save').click(function(){
+                            if ($('input.newUsername').val().trim() != "" && $('input.newPassword').val().trim() != "") {
+                                $.ajax({
+                                    url: 'CRUDController',
+                                    type: 'POST',
+                                    data: {
+                                        userID: currentID,
+                                        newUsername: $('input.newUsername').val().trim(),
+                                        newPassword: $('input.newPassword').val().trim(),
+                                        operation: "edit" },
+                                    success: function (data) {
+                                        var obj = JSON.parse(data);
+                                        var siblings = $('#' + obj.ID).parent().siblings();
+                                        $(siblings[1]).html(obj.newUsername);
+                                        $(siblings[2]).html(obj.newPassword);
+                                        $('tr.hidden_row').hide();
+                                        $('tr.hidden_row').children(".id").empty();
+                                    },
+                                    error: function (e) {
+                                        alert(e);
+                                    }
+                                });
+                            }
+                            else{
+                                alert("You must enter the new username and the new password first!")
+                            }
+                        });
+                    });
+                    $('input.add').click(function(){
+                        if ($('input.username').val().trim() != "" && $('input.password').val().trim() != "") {
+                            alert("new user added");
+                            $.ajax({
+                                url: 'CRUDController',
+                                type: 'POST',
+                                data: {
+                                    username: $('input.username').val().trim(),
+                                    password: $('input.password').val().trim(),
+                                    operation: "add"},
+                                success: function(data){
+                                    var obj = JSON.parse(data);
+                                    $('#dataTable tbody').append("<tr>" + "<td>" + obj.ID + "</td>" + "<td>" +
+                                            obj.username + "</td>" + "<td>" + obj.password + "</td>" +
+                                            "<td>" + "<input class='delete' id='"+ obj.ID +"' type='BUTTON' value='Delete'>" + "</td>" +
+                                            "<td>" + "<input class='edit' id='"+ obj.ID +"'type='BUTTON' value='Edit'>" + "</td>" + "</tr>");
+                                },
+                                error: function(e){
+                                    alert(e);
+                                }
+                            });
+                        }
+                        else {
+                            alert("You must enter the username and password first!")
+                        }
+
+                    });
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+//                $.post("CRUDController",
+//                        {
+//                            operation:"getAllUsers"
+//                        },
+//                        function(data,status) {
+//
+//                            var obj_rows = JSON.parse(data);
+//                            var tbody = $('#dataTable tbody');
+//                            for (i = 0; i < obj_rows.rows.length; i++) {
+//                                tbody.append("<tr>" + "<td>" + obj_rows.rows[i].ID + "</td>" + "<td>" +
+//                                        obj_rows.rows[i].username + "</td>" + "<td>" + obj_rows.rows[i].password + "</td>" + "</tr>");
+//                            }
+//                        });
+        });
+    </script>
+</head>
+<body>
+<table id="dataTable">
+    <thead>
+    <th>UserID</th>
+    <th>Username</th>
+    <th>Password</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td></td>
+        <td><input type="text" class="username"></td>
+        <td><input type="password" class="password"></td>
+        <td><input type="button" class="add" value="Add user"></td>
+    </tr>
+    <tr class="hidden_row" hidden>
+        <td class="id"></td>
+        <td><input type="text" class="newUsername"></td>
+        <td><input type="password" class="newPassword"></td>
+        <td><input type="button" class="save" value="Save"></td>
+        <td><input type="button" class="cancel" value="Cancel"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

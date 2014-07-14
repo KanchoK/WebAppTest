@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jquery json test</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            $('td').click(function(){
+               alert('clicked!');
+            });
+            var rows = '{"rows":[{"col1":"val11","col2":"val12","col3":"val13"},' +
+                    '{"col1":"val21","col2":"val22","col3":"val23"},' +
+                    '{"col1":"val31","col2":"val32","col3":"val33"}]}';
+            var obj_rows = JSON.parse(rows);
+            var tbody = $('#dataTable tbody');
+            for(i=0;i<obj_rows.rows.length;i++){
+                tbody.append("<tr>" + "<td>" + obj_rows.rows[i].col1 + "</td>" + "<td>" + obj_rows.rows[i].col2 + "</td>" + "<td>" + obj_rows.rows[i].col3 + "</td>" + "</tr>");
+            }
+        });
+    </script>
+</head>
+<body>
+<table id="dataTable">
+    <thead>
+    <th>Column1</th>
+    <th>Column2</th>
+    <th>Column3</th>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</body>
+</html>
