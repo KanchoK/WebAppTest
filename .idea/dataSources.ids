@@ -1096,11 +1096,17 @@
       <column name="LNAME" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="SYS_PK_10092" columns="ID"/>
     </table>
+    <table name="JTABLE" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
+      <column name="ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NAME" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CITY" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SYS_PK_10105" columns="ID"/>
+    </table>
     <table name="USER" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="USERID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="USERNAME" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="PASSWORD" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10130" columns="USERID"/>
+      <primary-key name="SYS_PK_10096" columns="USERID"/>
     </table>
     <table name="BLOCKS" schema="SYSTEM_LOBS" catalog="PUBLIC" type="SYSTEM TABLE">
       <column name="BLOCK_ADDR" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4"/>

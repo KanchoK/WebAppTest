@@ -48,4 +48,12 @@
         <servlet-name>CRUDController</servlet-name>
         <url-pattern>/CRUDController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>jTableController</servlet-name>
+        <servlet-class>com.web.jTableController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jTableController</servlet-name>
+        <url-pattern>/jTableController</url-pattern>
+    </servlet-mapping>
 </web-app>

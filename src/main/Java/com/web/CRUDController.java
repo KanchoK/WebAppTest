@@ -1,8 +1,13 @@
 package com.web;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +26,7 @@ public class CRUDController extends HttpServlet {
         if (operation.equals("getAllUsers")){
 
             List<User> listUsers = CrudDao.getAllUsers();
+
             JSONObject objUsers = new JSONObject();
             JSONArray array = new JSONArray();
 
@@ -33,13 +39,19 @@ public class CRUDController extends HttpServlet {
             }
 
             objUsers.put("rows",array);
-
             PrintWriter out = response.getWriter();
             out.println(objUsers);
-//            String stringObj = objUsers.toString();
-//            stringObj = "{\"Result\":\"OK\",\"Records:\":"+stringObj+"}";
-//            PrintWriter out = response.getWriter();
-//            out.println(stringObj);
+            System.out.println(objUsers);
+
+//            Gson gson = new Gson();
+//            JsonElement element = gson.toJsonTree(listUsers, new TypeToken<List<User>>(){}.getType());
+//            JsonArray jsonArray = element.getAsJsonArray();
+//            String listData = jsonArray.toString();
+//            listData = "{\"rows\":" + listData + "}";
+//            response.setContentType("application/json");
+//            response.getWriter().print(listData);
+//            System.out.println(listData);
+
         }
 
         else if (operation.equals("delete")){

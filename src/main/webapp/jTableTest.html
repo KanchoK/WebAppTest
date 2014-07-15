@@ -15,30 +15,23 @@
             $('#PersonTableContainer').jtable({
                 title: 'Table of people',
                 actions: {
-                    listAction: 'CRUDController?operation=getAllUsers',
-                    createAction: 'CRUDController?operation=add',
-                    updateAction: '/GettingStarted/UpdatePerson',
-                    deleteAction: '/GettingStarted/DeletePerson'
+                    listAction: 'jTableController?action=list',
+                    createAction: 'jTableController?action=create',
+                    updateAction: 'jTableController?action=update',
+                    deleteAction: 'jTableController?action=delete'
                 },
                 fields: {
-                    PersonId: {
+                    customerID: {
                         key: true,
                         list: false
                     },
-                    Name: {
-                        title: 'Author Name',
+                    customerName: {
+                        title: 'Customer Name',
                         width: '40%'
                     },
-                    Age: {
-                        title: 'Age',
+                    City: {
+                        title: 'City',
                         width: '20%'
-                    },
-                    RecordDate: {
-                        title: 'Record date',
-                        width: '30%',
-                        type: 'date',
-                        create: false,
-                        edit: false
                     }
                 }
             });
