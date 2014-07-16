@@ -1,5 +1,6 @@
 package com.web;
 
+import org.hsqldb.Session;
 import org.json.JSONObject;
 
 import javax.servlet.RequestDispatcher;
@@ -7,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -14,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Created by R500 on 9.7.2014 г..
  */
-public class FirstServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
@@ -30,6 +32,8 @@ public class FirstServlet extends HttpServlet {
         try {
             if (LoginCheck.validate(name, pass))
             {
+                HttpSession session = request.getSession();
+                session.setAttribute("username", name);
                 RequestDispatcher rd = request.getRequestDispatcher("servlet2");
                 rd.forward(request, response);
             }
